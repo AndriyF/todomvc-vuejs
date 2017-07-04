@@ -5,8 +5,12 @@
             <label @dblclick="setEditedTodo(todo)">{{todo.title}}</label>
             <button class="destroy" @click="removeTodo(todo)"></button>
         </div>
-        <input class="edit" type="text" v-model="todo.title" v-todo-focus="todo === editedTodo"
-               @blur="doneEdit(todo)" @keyup.enter="doneEdit(todo)" @keyup.esc="cancelEdit(todo)">
+        <input class="edit" type="text"
+               :value="todo.title"
+               v-todo-focus="todo === editedTodo"
+               @blur="doneEdit({ todo, title: $event.target.value })"
+               @keyup.enter="doneEdit({ todo, title: $event.target.value })"
+               @keyup.esc="cancelEdit">
     </div>
 </template>
 
@@ -25,13 +29,14 @@
       ...mapGetters(['editedTodo'])
     },
     methods: {
-      ...mapActions(['setEditedTodo', 'removeTodo', 'toggleTodo']),
-      editTodo () {
-      },
-      doneEdit () {
-      },
-      cancelEdit () {
-      }
+      ...mapActions([
+        'setEditedTodo',
+        'removeTodo',
+        'editTodo',
+        'toggleTodo',
+        'doneEdit',
+        'cancelEdit'
+      ])
     },
     directives: {
       'todo-focus': function (el, binding) {

@@ -13,8 +13,28 @@ export const toggleTodo = ({ commit }, payload) => {
   commit(types.TOGGLE_TODO, payload)
 }
 
+export const doneEdit = ({ commit, dispatch }, { todo, title }) => {
+  if (title !== '') {
+    commit(types.EDIT_TODO, { todo, title })
+  } else {
+    dispatch('removeTodo', todo)
+  }
+
+  dispatch('setEditCache', '')
+  dispatch('setEditedTodo', null)
+}
+
+export const cancelEdit = ({ dispatch }) => {
+  dispatch('setEditCache', '')
+  dispatch('setEditedTodo', null)
+}
+
 export const setNewTodo = ({ commit }, payload) => {
   commit(types.SET_NEW_TODO, payload)
+}
+
+export const setEditCache = ({ commit }, payload) => {
+  commit(types.SET_EDIT_CACHE, payload)
 }
 
 export const setEditedTodo = ({ commit }, payload) => {

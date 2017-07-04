@@ -11,6 +11,7 @@ Vue.use(Vuex)
 const state = {
   todos: [],
   newTodo: '',
+  editCache: '',
   editedTodo: null,
   filter: 'all'
 }
