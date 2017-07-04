@@ -12,13 +12,11 @@
   },
   "dependencies": {
     "ramda": "^0.24.1",
-    "rxjs": "^5.4.1",
     "todomvc-app-css": "^2.1.0",
     "todomvc-common": "^1.0.3",
     "vue": "^2.3.3",
-    "vue-localstorage": "^0.3.0",
-    "vue-rx": "^3.2.0",
-    "vuex": "^2.3.1"
+    "vuex": "^2.3.1",
+    "vuex-persistedstate": "^1.4.1"
   },
   "devDependencies": {
     "autoprefixer": "^6.7.2",
