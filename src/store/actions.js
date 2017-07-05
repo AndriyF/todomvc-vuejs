@@ -1,8 +1,11 @@
 import * as types from './mutation-types'
 
-export const addTodo = ({ commit, dispatch }) => {
-  commit(types.ADD_TODO)
-  dispatch('setNewTodo', '')
+export const addTodo = ({ commit }, payload) => {
+  if (payload.trim() === '') {
+    return
+  }
+
+  commit(types.ADD_TODO, payload)
 }
 
 export const removeTodo = ({ commit }, payload) => {
@@ -13,28 +16,24 @@ export const toggleTodo = ({ commit }, payload) => {
   commit(types.TOGGLE_TODO, payload)
 }
 
-export const doneEdit = ({ commit, dispatch }, { todo, title }) => {
-  if (title !== '') {
+export const doneEdit = ({ commit, dispatch, state }, { todo, title }) => {
+  if (state.editedTodo === null) {
+    return
+  }
+
+  if (title !== '' && todo.title !== title) {
     commit(types.EDIT_TODO, { todo, title })
-  } else {
+  }
+
+  if (title === '') {
     dispatch('removeTodo', todo)
   }
 
-  dispatch('setEditCache', '')
   dispatch('setEditedTodo', null)
 }
 
 export const cancelEdit = ({ dispatch }) => {
-  dispatch('setEditCache', '')
   dispatch('setEditedTodo', null)
-}
-
-export const setNewTodo = ({ commit }, payload) => {
-  commit(types.SET_NEW_TODO, payload)
-}
-
-export const setEditCache = ({ commit }, payload) => {
-  commit(types.SET_EDIT_CACHE, payload)
 }
 
 export const setEditedTodo = ({ commit }, payload) => {

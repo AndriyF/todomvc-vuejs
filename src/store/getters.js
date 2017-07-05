@@ -5,8 +5,7 @@ export const todos = state => {
     default: return state.todos
   }
 }
-export const newTodo = state => state.newTodo
 export const editedTodo = state => state.editedTodo
 export const filter = state => state.filter
-export const todosQuantity = state => state.todos.length
+export const todosCount = state => state.todos.length
 export const remaining = state => state.todos.filter(todo => !todo.completed).length

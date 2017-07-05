@@ -4,12 +4,11 @@
             <header class="header">
                 <h1>todos</h1>
                 <input class="new-todo" autofocus autocomplete="off" placeholder="What needs to be done?"
-                       :value="newTodo"
-                       @input.lazy="setNewTodo($event.target.value)"
-                       @keyup.enter="addTodo">
+                       @keydown.enter="addTodo($event.target.value)"
+                       @keyup.enter="$event.target.value = ''">
             </header>
             <todo-list :todos="todos"></todo-list>
-            <footer class="footer" v-show="todosQuantity > 0">
+            <footer class="footer" v-show="todosCount > 0">
 				<span class="todo-count">
 					<strong v-text="remaining"></strong> {{ pluralize('item', remaining) }} left
 				</span>
@@ -53,10 +52,10 @@
       TodoList
     },
     computed: {
-      ...mapGetters(['todos', 'newTodo', 'filter', 'remaining', 'todosQuantity'])
+      ...mapGetters(['todos', 'filter', 'remaining', 'todosCount'])
     },
     methods: {
-      ...mapActions(['addTodo', 'setNewTodo', 'removeCompletedTodos', 'setFilter']),
+      ...mapActions(['addTodo', 'removeCompletedTodos', 'setFilter']),
       pluralize (word, count) {
         return word + (count === 1 ? '' : 's')
       }

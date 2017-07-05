@@ -6,12 +6,8 @@ const baseTodo = {
 }
 
 export default {
-  [types.ADD_TODO] (state) {
-    if (state.newTodo === '') {
-      return
-    }
-
-    state.todos = state.todos.concat({ ...baseTodo, title: state.newTodo })
+  [types.ADD_TODO] (state, title) {
+    state.todos = state.todos.concat({ ...baseTodo, title })
   },
   [types.REMOVE_TODO] (state, todo) {
     state.todos = state.todos.filter(item => item !== todo)
@@ -22,17 +18,14 @@ export default {
   [types.TOGGLE_TODO] (state, todo) {
     state.todos = state.todos.map(item => item === todo ? { ...item, completed: !item.completed } : item)
   },
-  [types.SET_NEW_TODO] (state, newTodo) {
-    state.newTodo = newTodo
-  },
-
-  [types.SET_EDIT_CACHE] (state, text) {
-    state.setEditCache = text
+  [types.TOGGLE_ALL_TODOS] (state, checked) {
+    state.todos = state.todos.map(item => ({ ...item, completed: checked }))
   },
   [types.SET_EDITED_TODO] (state, editedTodo) {
     state.editedTodo = editedTodo
   },
   [types.REMOVE_COMPLETED_TODOS] (state) {
+    state.todos = state.todos.filter(item => !item.completed)
   },
   [types.SET_FILTER] (state, filter) {
     state.filter = filter

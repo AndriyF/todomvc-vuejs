@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="view">
-            <input class="toggle" type="checkbox" @click="toggleTodo(todo)">
+            <input class="toggle" type="checkbox" @click="toggleTodo(todo)" :checked="todo.completed">
             <label @dblclick="setEditedTodo(todo)">{{todo.title}}</label>
             <button class="destroy" @click="removeTodo(todo)"></button>
         </div>
@@ -32,7 +32,6 @@
       ...mapActions([
         'setEditedTodo',
         'removeTodo',
-        'editTodo',
         'toggleTodo',
         'doneEdit',
         'cancelEdit'

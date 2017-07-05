@@ -1,10 +1,10 @@
 <template>
-    <section class="main" v-show="todosQuantity > 0">
-        <input class="toggle-all" type="checkbox" @click="toggleAllTodos()">
+    <section class="main" v-show="todosCount > 0">
+        <input class="toggle-all" type="checkbox" @click="toggleAllTodos($event.target.checked)">
         <ul class="todo-list">
             <li class="todo" v-for="todo in todos"
                 :class="{completed: todo.completed, editing: todo == editedTodo}">
-                <todo-item :todo="todo"></todo-item>
+                <todo-item :todo="todo" key="todo.title"></todo-item>
             </li>
         </ul>
     </section>
@@ -30,7 +30,7 @@
       }
     },
     computed: {
-      ...mapGetters(['editedTodo', 'todosQuantity'])
+      ...mapGetters(['editedTodo', 'todosCount'])
     },
     methods: {
       ...mapActions(['toggleAllTodos'])
